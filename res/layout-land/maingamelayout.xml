@@ -2,22 +2,22 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/mainlayout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical" >
-    
+    android:layout_height="wrap_content" >
+
     <include
         android:id="@+id/numberpad"
-        android:layout_height="match_parent"
         android:layout_width="wrap_content"
-        layout="@layout/numberpad"
-        android:layout_alignParentRight="true" />
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        layout="@layout/numberpad" />
     
     <view
-        class="com.trinova.factstimer.ProblemViewer"
         android:id="@+id/problemviewer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" 
-        android:layout_toLeftOf="@id/numberpad" />
- 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/numberpad"
+        class="com.trinova.factstimer.ProblemViewer" />
+
 
 </RelativeLayout>

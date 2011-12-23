@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.Spinner;
 
 public class GameSetup extends Activity
 {
@@ -27,8 +28,14 @@ public class GameSetup extends Activity
 	
 	public void StartGame()
 	{
+		// Get the problem level
+		Spinner cboLevel = (Spinner)findViewById(R.id.cboSelectLevel);
+		int level = cboLevel.getSelectedItemPosition() + 1;
+		
+		// Start the main game activity
 		Intent intent = new Intent();
 		intent.setClass(this, MainGame.class);
+		intent.putExtra("Level", level);
 		startActivity(intent);
 	}
 }

@@ -1,5 +1,6 @@
 package com.trinova.factstimer;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -8,10 +9,12 @@ import android.widget.Toast;
 
 public class MainGame extends Activity
 {
-	Integer numberbuttons[] = {
+	private Integer numberbuttons[] = {
 		R.id.btnZero, R.id.btnOne, R.id.btnTwo, R.id.btnThree, R.id.btnFour, R.id.btnFive,
 		R.id.btnSix, R.id.btnSeven, R.id.btnEight, R.id.btnNine
 	};
+	
+	private Problem[] problemlist;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState)
@@ -19,6 +22,12 @@ public class MainGame extends Activity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.maingamelayout);
 		
+		Intent intent = getIntent();
+		int level = intent.getIntExtra("Level", 1);
+		problemlist = new Problem[25];
+		for (int x = 0; x < 25; x++)
+			problemlist[x] = new Problem(level);
+
 		for (int x = 0; x <= 9; x++)
 		{
 			Button button = (Button)findViewById(numberbuttons[x]);
@@ -52,6 +61,9 @@ public class MainGame extends Activity
 				EnterAnswer();
 			}
 		});
+		
+		ProblemViewer viewer = (ProblemViewer)findViewById(R.id.problemviewer);
+		viewer.setProblem(problemlist[0]);
 	}
 	
 	private void AddDigit(int digit)

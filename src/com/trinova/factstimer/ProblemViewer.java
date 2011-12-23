@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.view.View;
 public class ProblemViewer extends View
 {
 	Paint paint;
+	Problem problem;
 	
 	public ProblemViewer(Context context)
 	{
@@ -36,27 +38,22 @@ public class ProblemViewer extends View
 	public void Initialize()
 	{
 		paint = new Paint();
+		problem = null;
 	}
 	
 	public void onDraw(Canvas canvas)
 	{
 		paint.setColor(Color.WHITE);
-		canvas.drawText("hello there", canvas.getWidth() / 2, canvas.getHeight() / 2, paint);
+		canvas.drawText("hello there", 10, 10, paint);
+		if (problem != null)
+		{
+			Rect viewRect = new Rect(0, 0, getWidth(), getHeight());
+			problem.drawProblem(canvas, viewRect, paint);
+		}
 	}
 	
-	/*
-	public void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
+	public void setProblem(Problem newproblem)
 	{
-		int widthmode = MeasureSpec.getMode(widthMeasureSpec);
-		int width = MeasureSpec.getSize(widthMeasureSpec);
-		int heightmode = MeasureSpec.getMode(heightMeasureSpec);
-		int height = MeasureSpec.getSize(heightMeasureSpec);
-		
-		if (width > height)
-			width = (int)(.75 * width);
-		else
-			height = (int)(.75 * height);
-
-		setMeasuredDimension(width, height);
-	}*/
+		problem = newproblem;
+	}
 }
