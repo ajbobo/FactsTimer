@@ -6,13 +6,12 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 
 public class ProblemViewer extends View
 {
-	Paint paint;
-	Problem problem;
+	Paint _paint;
+	GameData _gamedata;
 	
 	public ProblemViewer(Context context)
 	{
@@ -37,23 +36,22 @@ public class ProblemViewer extends View
 	
 	public void Initialize()
 	{
-		paint = new Paint();
-		problem = null;
+		_paint = new Paint();
 	}
 	
 	public void onDraw(Canvas canvas)
 	{
-		paint.setColor(Color.WHITE);
-		canvas.drawText("hello there", 10, 10, paint);
-		if (problem != null)
+		_paint.setColor(Color.WHITE);
+		if (_gamedata != null)
 		{
+			canvas.drawText(_gamedata.getProblemNumber() + "/" + _gamedata.getProblemCount(), 10, 10, _paint);
 			Rect viewRect = new Rect(0, 0, getWidth(), getHeight());
-			problem.drawProblem(canvas, viewRect, paint);
+			_gamedata.getCurrentProblem().drawProblem(canvas, viewRect, _paint);
 		}
 	}
 	
-	public void setProblem(Problem newproblem)
+	public void setGameData(GameData gamedata)
 	{
-		problem = newproblem;
+		_gamedata = gamedata;
 	}
 }

@@ -32,10 +32,13 @@ public class GameSetup extends Activity
 		Spinner cboLevel = (Spinner)findViewById(R.id.cboSelectLevel);
 		int level = cboLevel.getSelectedItemPosition() + 1;
 		
+		// Create a new GameData
+		GameData gdata = new GameData(5, level);
+		
 		// Start the main game activity
 		Intent intent = new Intent();
 		intent.setClass(this, MainGame.class);
-		intent.putExtra("Level", level);
+		intent.putExtra("GameData", gdata);
 		startActivity(intent);
 	}
 }

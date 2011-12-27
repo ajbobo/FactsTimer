@@ -1,20 +1,22 @@
 package com.trinova.factstimer;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.Toast;
 
 public class MainGame extends Activity
 {
-	private Integer numberbuttons[] = {
+	private Integer _numberbuttons[] = {
 		R.id.btnZero, R.id.btnOne, R.id.btnTwo, R.id.btnThree, R.id.btnFour, R.id.btnFive,
 		R.id.btnSix, R.id.btnSeven, R.id.btnEight, R.id.btnNine
 	};
+	ProblemViewer _viewer;
 	
-	private Problem[] problemlist;
+	private GameData _gamedata;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState)
@@ -23,14 +25,12 @@ public class MainGame extends Activity
 		setContentView(R.layout.maingamelayout);
 		
 		Intent intent = getIntent();
-		int level = intent.getIntExtra("Level", 1);
-		problemlist = new Problem[25];
-		for (int x = 0; x < 25; x++)
-			problemlist[x] = new Problem(level);
+		_gamedata = intent.getParcelableExtra("GameData");
 
-		for (int x = 0; x <= 9; x++)
+		int temp = 0;
+		for (int x = temp; x <= 9; x++)
 		{
-			Button button = (Button)findViewById(numberbuttons[x]);
+			Button button = (Button)findViewById(_numberbuttons[x]);
 			button.setOnClickListener(new OnClickListener()
 			{
 				public void onClick(View v)
@@ -62,17 +62,42 @@ public class MainGame extends Activity
 			}
 		});
 		
-		ProblemViewer viewer = (ProblemViewer)findViewById(R.id.problemviewer);
-		viewer.setProblem(problemlist[0]);
+		_viewer = (ProblemViewer)findViewById(R.id.problemviewer);
+		_viewer.setGameData(_gamedata);
 	}
 	
 	private void AddDigit(int digit)
 	{
-		Toast.makeText(this, "You pressed " + digit, Toast.LENGTH_SHORT).show();
+		_gamedata.getCurrentProblem().addDigitToAnswer(digit);
+		_viewer.invalidate();
 	}
 	
 	private void EnterAnswer()
 	{
-		Toast.makeText(this, "Enter", Toast.LENGTH_SHORT).show();
+		if (_gamedata.getProblemNumber() != _gamedata.getProblemCount())
+			_gamedata.nextProblem();
+		else
+			EndGame();
+		_viewer.invalidate();
+	}
+	
+	private void EndGame()
+	{
+		// Put together the score message
+		String message = "";
+		message += "You got " + _gamedata.getNumberCorrect() + " out of " + _gamedata.getProblemCount() + "\r\n";
+		
+
+		// Display the score
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setMessage(message).setCancelable(false).setNeutralButton("OK", new DialogInterface.OnClickListener()
+		{
+			public void onClick(DialogInterface dialog, int id)
+			{
+				MainGame.this.finish();
+			}
+		}).setTitle("Final Score");
+		AlertDialog alert = builder.create();
+		alert.show();
 	}
 }
