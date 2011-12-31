@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <string name="hello">Hello World, GameSetup!</string>
     <string name="app_name">FactsTimer</string>
+    <string name="level_prompt">Game Level</string>
+    <string name="problem_count_prompt">Number of Problems</string>
 
 </resources>

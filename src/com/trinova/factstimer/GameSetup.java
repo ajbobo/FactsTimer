@@ -32,8 +32,12 @@ public class GameSetup extends Activity
 		Spinner cboLevel = (Spinner)findViewById(R.id.cboSelectLevel);
 		int level = cboLevel.getSelectedItemPosition() + 1;
 		
+		// Get the number of problems
+		Spinner cboProblems = (Spinner)findViewById(R.id.cboNumProblems);
+		int numproblems = Integer.parseInt(cboProblems.getSelectedItem().toString());
+		
 		// Create a new GameData
-		GameData gdata = new GameData(5, level);
+		GameData gdata = new GameData(numproblems, level);
 		
 		// Start the main game activity
 		Intent intent = new Intent();

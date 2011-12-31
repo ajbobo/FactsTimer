@@ -10,12 +10,34 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_launcher" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/level_prompt"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <Spinner
         android:id="@+id/cboSelectLevel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:entries="@array/LevelList" />
+        android:entries="@array/LevelList"
+        android:prompt="@string/level_prompt" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/problem_count_prompt"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Spinner
+        android:id="@+id/cboNumProblems"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/ProblemCountList"
+        android:prompt="@string/problem_count_prompt" />
 
     <Button
         android:id="@+id/btnStartGame"

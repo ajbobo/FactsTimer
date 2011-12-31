@@ -28,9 +28,6 @@ public class GameData implements Parcelable
 		
 		_curproblem = 0;
 		_gameover = false;
-		
-		_starttime = new Time();
-		_starttime.setToNow();
 	}
 	
 	public GameData(Parcel parcel)
