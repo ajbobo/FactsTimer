@@ -100,11 +100,11 @@ public class GameData implements Parcelable
 		return "F";
 	}
 	
-	public double getTotalTime()
+	public long getTotalTime()
 	{
 		long diff = _endtime.toMillis(false) - _starttime.toMillis(false); // The time in milliseconds
 		
-		double seconds = diff / 1000;
+		long seconds = diff / 1000;
 		
 		return seconds;
 	}

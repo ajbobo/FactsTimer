@@ -84,13 +84,20 @@ public class MainGame extends Activity
 	
 	private void EndGame()
 	{
+		long minutes = _gamedata.getTotalTime() / 60;
+		long seconds = _gamedata.getTotalTime() % 60;
 		// Put together the score message
 		String message = "";
-		message += "You got " + _gamedata.getNumberCorrect() + " out of " + _gamedata.getProblemCount() + "\r\n";
+		message += "Accuracy:\r\n";
+		message += "\t" + _gamedata.getNumberCorrect() + " out of " + _gamedata.getProblemCount() + "\r\n";
 		message += "\t\tGrade:  " + _gamedata.getProblemGrade() + "\r\n";
 		message += "\r\n";
-		message += "You took " + _gamedata.getTotalTime() + " seconds\r\n";
-		message += "\t\tGrade:  " + _gamedata.getTimeGrade() + "\r\n";
+		message += "Time:\r\n";
+		message += "\t" + minutes + " minute" + (minutes != 1 ? "s" : "") + "\r\n";
+		message += "\t" + seconds + " second" + (seconds != 1 ? "s" : "") + "\r\n";
+		message += "\t\tGrade: " + _gamedata.getTimeGrade() + "\r\n";
+		//message += "You took " + _gamedata.getTotalTime() + " seconds\r\n";
+		//message += "\t\tGrade:  " + _gamedata.getTimeGrade() + "\r\n";
 		
 
 		// Display the score
