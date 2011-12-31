@@ -13,10 +13,10 @@ public class Problem implements Parcelable
 	private static final int NO_ANSWER = -1;
 	private static final int MIN_LEVEL = 1;
 	private static final int MAX_LEVEL = 1;
-	private static final int _operator_PLUS = 1;
-	private static final int _operator_MINUS = 2;
-	private static final int _operator_TIMES = 3;
-	private static final int _operator_DIVIDE = 4;
+	private static final int OPERATOR_PLUS = 1;
+	private static final int OPERATOR_MINUS = 2;
+	private static final int OPERATOR_TIMES = 3;
+	private static final int OPERATOR_DIVIDE = 4;
 	
 	private int _operand1, _operand2, _result, _operator, _useranswer;
 	
@@ -47,7 +47,7 @@ public class Problem implements Parcelable
 	private void makeLevel1(Random rand)
 	{
 		// Add two 1-digit numbers
-		_operator = _operator_PLUS;
+		_operator = OPERATOR_PLUS;
 		
 		_operand1 = rand.nextInt(10);
 		_operand2 = rand.nextInt(10);
@@ -59,10 +59,10 @@ public class Problem implements Parcelable
 	{
 		switch (_operator)
 		{
-		case _operator_PLUS: return "+";
-		case _operator_MINUS: return "-";
-		case _operator_TIMES: return "*";
-		case _operator_DIVIDE: return "/";
+		case OPERATOR_PLUS: return "+";
+		case OPERATOR_MINUS: return "-";
+		case OPERATOR_TIMES: return "*";
+		case OPERATOR_DIVIDE: return "/";
 		}
 		
 		return "";
