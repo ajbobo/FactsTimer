@@ -38,16 +38,16 @@ public class MainGame extends Activity
 					int id = v.getId();
 					switch(id)
 					{
-					case R.id.btnZero:	AddDigit(0); break;
-					case R.id.btnOne:		AddDigit(1); break;
-					case R.id.btnTwo:		AddDigit(2); break;
-					case R.id.btnThree:	AddDigit(3); break;
-					case R.id.btnFour:	AddDigit(4); break;
-					case R.id.btnFive:	AddDigit(5); break;
-					case R.id.btnSix:		AddDigit(6); break;
-					case R.id.btnSeven:	AddDigit(7); break;
-					case R.id.btnEight:	AddDigit(8); break;
-					case R.id.btnNine:	AddDigit(9); break;
+					case R.id.btnZero:	addDigit(0); break;
+					case R.id.btnOne:		addDigit(1); break;
+					case R.id.btnTwo:		addDigit(2); break;
+					case R.id.btnThree:	addDigit(3); break;
+					case R.id.btnFour:	addDigit(4); break;
+					case R.id.btnFive:	addDigit(5); break;
+					case R.id.btnSix:		addDigit(6); break;
+					case R.id.btnSeven:	addDigit(7); break;
+					case R.id.btnEight:	addDigit(8); break;
+					case R.id.btnNine:	addDigit(9); break;
 					}
 				}
 			});
@@ -58,7 +58,16 @@ public class MainGame extends Activity
 		{
 			public void onClick(View v)
 			{
-				EnterAnswer();
+				enterAnswer();
+			}
+		});
+		
+		button = (Button)findViewById(R.id.btnClear);
+		button.setOnClickListener(new OnClickListener()
+		{
+			public void onClick(View v)
+			{
+				clearAnswer();
 			}
 		});
 		
@@ -67,22 +76,28 @@ public class MainGame extends Activity
 		_viewer.setGameData(_gamedata);
 	}
 	
-	private void AddDigit(int digit)
+	private void addDigit(int digit)
 	{
 		_gamedata.getCurrentProblem().addDigitToAnswer(digit);
 		_viewer.invalidate();
 	}
 	
-	private void EnterAnswer()
+	private void clearAnswer()
+	{
+		_gamedata.getCurrentProblem().clearAnswer();
+		_viewer.invalidate();
+	}
+	
+	private void enterAnswer()
 	{
 
 		_gamedata.nextProblem();
 		if (_gamedata.isGameOver())
-			EndGame();
+			endGame();
 		_viewer.invalidate();
 	}
 	
-	private void EndGame()
+	private void endGame()
 	{
 		long minutes = _gamedata.getTotalTime() / 60;
 		long seconds = _gamedata.getTotalTime() % 60;
@@ -96,8 +111,6 @@ public class MainGame extends Activity
 		message += "\t" + minutes + " minute" + (minutes != 1 ? "s" : "") + "\r\n";
 		message += "\t" + seconds + " second" + (seconds != 1 ? "s" : "") + "\r\n";
 		message += "\t\tGrade: " + _gamedata.getTimeGrade() + "\r\n";
-		//message += "You took " + _gamedata.getTotalTime() + " seconds\r\n";
-		//message += "\t\tGrade:  " + _gamedata.getTimeGrade() + "\r\n";
 		
 
 		// Display the score

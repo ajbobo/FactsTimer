@@ -17,24 +17,24 @@ public class ProblemViewer extends View
 	{
 		super(context);
 		
-		Initialize();
+		initialize();
 	}
 	
 	public ProblemViewer(Context context, AttributeSet attrs)
 	{
 		super(context, attrs);
 		
-		Initialize();
+		initialize();
 	}
 	
 	public ProblemViewer(Context context, AttributeSet attrs, int defStyle)
 	{
 		super(context,attrs,defStyle);
 		
-		Initialize();
+		initialize();
 	}
 	
-	public void Initialize()
+	public void initialize()
 	{
 		_paint = new Paint();
 	}

@@ -85,26 +85,32 @@
             android:layout_weight="1"
             android:text="9" />
     </TableRow>
-
+
     <TableRow
         android:id="@+id/padRow4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" >
-
+
+        <Button
+            android:id="@+id/btnClear"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="C" />
+
         <Button
             android:id="@+id/btnZero"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="0" />
-
+
         <Button
             android:id="@+id/btnEnter"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
+            android:layout_weight="1"
             android:text="Enter" />
-
     </TableRow>
 
 </TableLayout>

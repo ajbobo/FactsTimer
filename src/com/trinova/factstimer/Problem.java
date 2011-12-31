@@ -31,7 +31,7 @@ public class Problem implements Parcelable
 		
 		switch(level)
 		{
-		case 1: MakeLevel1(rand); break;
+		case 1: makeLevel1(rand); break;
 		}
 	}
 	
@@ -44,7 +44,7 @@ public class Problem implements Parcelable
 		_useranswer = parcel.readInt();
 	}
 	
-	private void MakeLevel1(Random rand)
+	private void makeLevel1(Random rand)
 	{
 		// Add two 1-digit numbers
 		_operator = _operator_PLUS;
@@ -53,13 +53,6 @@ public class Problem implements Parcelable
 		_operand2 = rand.nextInt(10);
 		
 		_result = _operand1 + _operand2;
-	}
-	
-	public boolean isCorrect()
-	{
-		if (_useranswer == _result)
-			return true;
-		return false;
 	}
 	
 	private String getOpString()
@@ -85,12 +78,24 @@ public class Problem implements Parcelable
 		canvas.drawText(result, x, y, paint);
 	}
 	
+	public boolean isCorrect()
+	{
+		if (_useranswer == _result)
+			return true;
+		return false;
+	}
+	
 	public void addDigitToAnswer(int digit)
 	{
 		if (_useranswer == NO_ANSWER)
 			_useranswer = digit;
 		else
 			_useranswer = (10 * _useranswer) + digit;
+	}
+	
+	public void clearAnswer()
+	{
+		_useranswer = NO_ANSWER;
 	}
 
 	public int describeContents() // Requred by Parcelable
