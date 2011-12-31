@@ -3,6 +3,7 @@ import java.util.Random;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.text.format.Time;
 
 
 
@@ -12,6 +13,8 @@ public class GameData implements Parcelable
 	private int _problemcnt;
 	private int _level;
 	private int _curproblem;
+	private boolean _gameover;
+	private Time _starttime, _endtime;
 	
 	public GameData(int numproblems, int level)
 	{
@@ -24,6 +27,10 @@ public class GameData implements Parcelable
 			_problemlist[x] = new Problem(_level, rand);
 		
 		_curproblem = 0;
+		_gameover = false;
+		
+		_starttime = new Time();
+		_starttime.setToNow();
 	}
 	
 	public GameData(Parcel parcel)
@@ -33,6 +40,15 @@ public class GameData implements Parcelable
 		_curproblem = parcel.readInt();
 		_problemlist = new Problem[_problemcnt];
 		parcel.readTypedArray(_problemlist, Problem.CREATOR);
+	}
+	
+	public void startTime()
+	{
+		if (_starttime != null)
+			return;
+		
+		_starttime = new Time();
+		_starttime.setToNow();
 	}
 	
 	public Problem getCurrentProblem() 
@@ -50,6 +66,11 @@ public class GameData implements Parcelable
 		return _problemcnt;
 	}
 	
+	public boolean isGameOver()
+	{
+		return _gameover;
+	}
+	
 	public int getNumberCorrect()
 	{
 		int res = 0;
@@ -63,11 +84,57 @@ public class GameData implements Parcelable
 		return res;
 	}
 	
+	public String getProblemGrade()
+	{
+		double percent = (double)getNumberCorrect() / (double)_problemcnt;
+		
+		if (percent >= .9)
+			return "A";
+		else if (percent >= .8)
+			return "B";
+		else if (percent >= .7)
+			return "C";
+		else if (percent >= .6)
+			return "D";
+		
+		return "F";
+	}
+	
+	public double getTotalTime()
+	{
+		long diff = _endtime.toMillis(false) - _starttime.toMillis(false); // The time in milliseconds
+		
+		double seconds = diff / 1000;
+		
+		return seconds;
+	}
+	
+	public String getTimeGrade()
+	{
+		double timeperproblem = getTotalTime() / _problemcnt; 
+
+		if (timeperproblem <= 4)
+			return "A";
+		else if (timeperproblem <= 6)
+			return "B";
+		else if (timeperproblem <= 12)
+			return "C";
+		else if (timeperproblem <= 20)
+			return "D";
+		
+		return "F";
+	}
+	
 	public void nextProblem()
 	{
 		_curproblem++;
 		if (_curproblem >= _problemcnt)
-			_curproblem = 0; // wrap around for now
+		{
+			_curproblem = 0;
+			_gameover = true;
+			_endtime = new Time();
+			_endtime.setToNow();
+		}
 	}
 	
 	public int describeContents()

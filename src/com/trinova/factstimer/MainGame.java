@@ -62,6 +62,7 @@ public class MainGame extends Activity
 			}
 		});
 		
+		_gamedata.startTime();
 		_viewer = (ProblemViewer)findViewById(R.id.problemviewer);
 		_viewer.setGameData(_gamedata);
 	}
@@ -74,9 +75,9 @@ public class MainGame extends Activity
 	
 	private void EnterAnswer()
 	{
-		if (_gamedata.getProblemNumber() != _gamedata.getProblemCount())
-			_gamedata.nextProblem();
-		else
+
+		_gamedata.nextProblem();
+		if (_gamedata.isGameOver())
 			EndGame();
 		_viewer.invalidate();
 	}
@@ -86,6 +87,10 @@ public class MainGame extends Activity
 		// Put together the score message
 		String message = "";
 		message += "You got " + _gamedata.getNumberCorrect() + " out of " + _gamedata.getProblemCount() + "\r\n";
+		message += "\t\tGrade:  " + _gamedata.getProblemGrade() + "\r\n";
+		message += "\r\n";
+		message += "You took " + _gamedata.getTotalTime() + " seconds\r\n";
+		message += "\t\tGrade:  " + _gamedata.getTimeGrade() + "\r\n";
 		
 
 		// Display the score
