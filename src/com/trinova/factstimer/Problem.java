@@ -83,7 +83,7 @@ public class Problem implements Parcelable
 	{
 		int height = viewRect.height();
 		int sectionheight = height / 3;
-		paint.setTextSize(sectionheight - 10);
+		paint.setTextSize(sectionheight);
 		
 		String numstr1 = getNumString(_operand1);
 		String numstr2 = getNumString(_operand2);
