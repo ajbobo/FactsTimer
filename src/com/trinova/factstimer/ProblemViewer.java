@@ -44,6 +44,7 @@ public class ProblemViewer extends View
 		_paint.setColor(Color.WHITE);
 		if (_gamedata != null)
 		{
+			_paint.setTextSize(10);
 			canvas.drawText(_gamedata.getProblemNumber() + "/" + _gamedata.getProblemCount(), 10, 10, _paint);
 			Rect viewRect = new Rect(0, 0, getWidth(), getHeight());
 			_gamedata.getCurrentProblem().drawProblem(canvas, viewRect, _paint);

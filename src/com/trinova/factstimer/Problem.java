@@ -55,9 +55,9 @@ public class Problem implements Parcelable
 		_result = _operand1 + _operand2;
 	}
 	
-	private String getOpString()
+	private String getOpString(int operator)
 	{
-		switch (_operator)
+		switch (operator)
 		{
 		case OPERATOR_PLUS: return "+";
 		case OPERATOR_MINUS: return "-";
@@ -68,14 +68,42 @@ public class Problem implements Parcelable
 		return "";
 	}
 	
+	private String getNumString(int num)
+	{
+		// Always put space for 2 digits in the result
+		if (num > 9)
+			return Integer.toString(num);
+		else if (num == NO_ANSWER)
+			return "  ";
+		
+		return " " + num;
+	}
+	
 	public void drawProblem(Canvas canvas, Rect viewRect, Paint paint)
 	{
-		String result = _operand1 + " " + getOpString() + " " + _operand2;
-		if (_useranswer != NO_ANSWER)
-			result += " = " + _useranswer;
-		int x = viewRect.left + (viewRect.width() / 2);
-		int y = viewRect.top + (viewRect.height() / 2);
-		canvas.drawText(result, x, y, paint);
+		int height = viewRect.height();
+		int sectionheight = height / 3;
+		paint.setTextSize(sectionheight - 10);
+		
+		String numstr1 = getNumString(_operand1);
+		String numstr2 = getNumString(_operand2);
+		String opstr = getOpString(_operator);
+		String answerstr = getNumString(_useranswer);
+		
+		// Come up with a better way to center the problem on the screen - FINISH ME
+		int x = viewRect.left = (viewRect.width() / 2);
+		int farleft = (int) (x - paint.measureText(opstr));
+		int y = sectionheight - 5;
+		canvas.drawText(numstr1, x, y, paint);
+		y = sectionheight * 2 - 5;
+		canvas.drawText(numstr2, x, y, paint);
+		canvas.drawText(opstr, farleft, y, paint);
+		y = sectionheight * 3 - 5;
+		canvas.drawText(answerstr, x, y, paint);
+		
+		paint.setStrokeWidth(3);
+		y = sectionheight * 2;
+		canvas.drawLine(farleft, y, x + paint.measureText(numstr1), y, paint);
 	}
 	
 	public boolean isCorrect()
