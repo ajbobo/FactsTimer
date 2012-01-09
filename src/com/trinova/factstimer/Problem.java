@@ -12,7 +12,7 @@ public class Problem implements Parcelable
 {
 	private static final int NO_ANSWER = -1;
 	private static final int MIN_LEVEL = 1;
-	private static final int MAX_LEVEL = 1;
+	private static final int MAX_LEVEL = 2;
 	private static final int OPERATOR_PLUS = 1;
 	private static final int OPERATOR_MINUS = 2;
 	private static final int OPERATOR_TIMES = 3;
@@ -32,6 +32,7 @@ public class Problem implements Parcelable
 		switch(level)
 		{
 		case 1: makeLevel1(rand); break;
+		case 2: makeLevel2(rand); break;
 		}
 	}
 	
@@ -53,6 +54,17 @@ public class Problem implements Parcelable
 		_operand2 = rand.nextInt(10);
 		
 		_result = _operand1 + _operand2;
+	}
+	
+	private void makeLevel2(Random rand)
+	{
+		// Subtract two 1-digit numbers (no negative results)
+		_operator = OPERATOR_MINUS;
+		
+		_operand1 = rand.nextInt(9) + 1; // 1-9
+		_operand2 = rand.nextInt(_operand1 + 1); // Less than or equal to operator1
+		
+		_result = _operand1 - _operand2;
 	}
 	
 	private String getOpString(int operator)

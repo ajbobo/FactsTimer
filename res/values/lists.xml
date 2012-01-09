@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="LevelList">
-        <item >Level 1</item>
+        <item >Level 1 - Basic Addition</item>
+        <item >Level 2 - Basic Subtraction</item>
     </string-array>
     <string-array name="ProblemCountList">
         <item >10</item>
