@@ -1,7 +1,5 @@
 package com.trinova.factstimer;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -90,39 +88,20 @@ public class MainGame extends Activity
 	
 	private void enterAnswer()
 	{
-
 		_gamedata.nextProblem();
 		if (_gamedata.isGameOver())
 			endGame();
-		_viewer.invalidate();
+		else
+			_viewer.invalidate();
 	}
 	
 	private void endGame()
 	{
-		long minutes = _gamedata.getTotalTime() / 60;
-		long seconds = _gamedata.getTotalTime() % 60;
-		// Put together the score message
-		String message = "";
-		message += "Accuracy:\r\n";
-		message += "\t" + _gamedata.getNumberCorrect() + " out of " + _gamedata.getProblemCount() + "\r\n";
-		message += "\t\tGrade:  " + _gamedata.getProblemGrade() + "\r\n";
-		message += "\r\n";
-		message += "Time:\r\n";
-		message += "\t" + minutes + " minute" + (minutes != 1 ? "s" : "") + "\r\n";
-		message += "\t" + seconds + " second" + (seconds != 1 ? "s" : "") + "\r\n";
-		message += "\t\tGrade: " + _gamedata.getTimeGrade() + "\r\n";
+		Intent intent = new Intent();
+		intent.setClass(this, ResultViewer.class);
+		intent.putExtra("GameData", _gamedata);
+		startActivity(intent);
 		
-
-		// Display the score
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setMessage(message).setCancelable(false).setNeutralButton("OK", new DialogInterface.OnClickListener()
-		{
-			public void onClick(DialogInterface dialog, int id)
-			{
-				MainGame.this.finish();
-			}
-		}).setTitle("Final Score");
-		AlertDialog alert = builder.create();
-		alert.show();
+		finish();
 	}
 }

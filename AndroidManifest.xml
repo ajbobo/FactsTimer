@@ -19,6 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name="MainGame"></activity>
+        <activity android:name="ResultViewer"></activity>
     </application>
 
 </manifest>

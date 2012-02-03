@@ -9,7 +9,8 @@
         android:id="@+id/imgMainGraphic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_launcher" />
+        android:src="@drawable/ic_launcher"
+        android:contentDescription="FactsTimer Logo" />
 
     <TextView
         android:id="@+id/textView1"
@@ -43,6 +44,6 @@
         android:id="@+id/btnStartGame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Start Game" />
+        android:text="@string/startgame" />
 
 </LinearLayout>

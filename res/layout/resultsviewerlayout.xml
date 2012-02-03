@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/lblAccuracy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/accuracy_label"
+        android:textSize="25dp" />
+
+    <TextView
+        android:id="@+id/lblTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/lblAccuracy"
+        android:layout_marginTop="14dp"
+        android:text="@string/time_label"
+        android:textSize="25dp" />
+
+    <TextView
+        android:id="@+id/lblAccuracyScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_toRightOf="@+id/lblAccuracy"
+        android:text="@string/placeholdertext"
+        android:textSize="25dp" />
+
+    <TextView
+        android:id="@+id/lblTimeScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/lblTime"
+        android:layout_alignBottom="@+id/lblTime"
+        android:layout_alignLeft="@+id/lblAccuracyScore"
+        android:text="@string/placeholdertext"
+        android:textSize="25dp" />
+
+    <TextView
+        android:id="@+id/lblAccuracyGrade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/placeholdertext"
+        android:textSize="25dp" />
+
+    <TextView
+        android:id="@+id/lblTimeGrade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/lblTimeScore"
+        android:layout_alignBottom="@+id/lblTimeScore"
+        android:layout_alignParentRight="true"
+        android:text="@string/placeholdertext"
+        android:textSize="25dp" />
+
+</RelativeLayout>

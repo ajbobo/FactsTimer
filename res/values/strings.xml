@@ -3,5 +3,9 @@
     <string name="app_name">FactsTimer</string>
     <string name="level_prompt">Game Level</string>
     <string name="problem_count_prompt">Number of Problems</string>
+    <string name="accuracy_label">Accuracy:</string>
+    <string name="time_label">Time:</string>
+    <string name="placeholdertext">_aBc_</string>
+    <string name="startgame">Start Game</string>
 
 </resources>

@@ -36,6 +36,17 @@ public class GameData implements Parcelable
 		_level = parcel.readInt();
 		_curproblem = parcel.readInt();
 		_problemlist = new Problem[_problemcnt];
+		if (parcel.readInt() == 1)
+		{
+			_starttime = new Time();
+			_starttime.set(parcel.readLong());
+		}
+		if (parcel.readInt() == 1)
+		{
+			_endtime = new Time();
+			_endtime.set(parcel.readLong());
+		}
+		
 		parcel.readTypedArray(_problemlist, Problem.CREATOR);
 	}
 	
@@ -144,6 +155,12 @@ public class GameData implements Parcelable
 		dest.writeInt(_problemcnt);
 		dest.writeInt(_level);
 		dest.writeInt(_curproblem);
+		dest.writeInt((_starttime != null ? 1 : 0));
+		if (_starttime != null)
+			dest.writeLong(_starttime.toMillis(false));
+		dest.writeInt((_endtime != null ? 1 : 0));
+		if (_endtime != null)
+			dest.writeLong(_endtime.toMillis(false));
 		dest.writeTypedArray(_problemlist, 0);
 	}
 	
