@@ -12,7 +12,7 @@ public class Problem implements Parcelable
 {
 	private static final int NO_ANSWER = -1;
 	private static final int MIN_LEVEL = 1;
-	private static final int MAX_LEVEL = 3;
+	private static final int MAX_LEVEL = 4;
 	private static final int OPERATOR_PLUS = 1;
 	private static final int OPERATOR_MINUS = 2;
 	private static final int OPERATOR_TIMES = 3;
@@ -34,6 +34,7 @@ public class Problem implements Parcelable
 		case 1: makeLevel1(rand); break;
 		case 2: makeLevel2(rand); break;
 		case 3: makeLevel3(rand); break;
+		case 4: makeLevel4(rand); break;
 		}
 	}
 	
@@ -77,13 +78,24 @@ public class Problem implements Parcelable
 			makeLevel2(rand);
 	}
 	
+	private void makeLevel4(Random rand)
+	{
+		// Multiplication (x*0 through x*4)
+		_operator = OPERATOR_TIMES;
+		
+		_operand1 = rand.nextInt(10); // 0-9
+		_operand2 = rand.nextInt(5); // 0-4
+		
+		_result = _operand1  * _operand2;
+	}
+	
 	private String getOpString(int operator)
 	{
 		switch (operator)
 		{
 		case OPERATOR_PLUS: return "+";
 		case OPERATOR_MINUS: return "-";
-		case OPERATOR_TIMES: return "*";
+		case OPERATOR_TIMES: return "x";
 		case OPERATOR_DIVIDE: return "/";
 		}
 		
